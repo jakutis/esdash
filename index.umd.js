@@ -29,6 +29,19 @@ var _flatten = function(array) {
 };
 var _undefined;
 var _ = {
+    bindLeft: function(fn, obj) {
+        var args = Array.from(arguments);
+        args.shift();
+        return fn.bind.apply(fn, args);
+    },
+    bindRight: function(fn, obj) {
+        var args = Array.from(arguments);
+        args.shift();
+        args.shift();
+        return function() {
+            return fn.apply(obj, Array.from(arguments).concat(args));
+        };
+    },
     undefined: _undefined,
     unique: function() {
         var values = _flatten(Array.from(arguments));
