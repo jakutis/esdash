@@ -48,4 +48,14 @@ Functional programming helper library that is aware of (does not duplicate) the 
 
 ## Development
 
-    TODO
+After cloning the repo, and on each modification of `index.js` file, you have to run `npm run compile`.
+
+To run tests run `npm test`.
+
+#### Checklist before releasing
+
+* `npm run compile`.
+* tests pass.
+* package.json, bower.json and component.json version number bumped
+* `release X.X.X` commit created and tagged as `X.X.X`.
+* `npm publish`.
