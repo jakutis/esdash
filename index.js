@@ -17,6 +17,16 @@ var _flatten = function(array) {
 };
 var _undefined;
 var _ = {
+    all: function() {
+        var funs = Array.from(arguments);
+        return function() {
+            var args = Array.from(arguments);
+            funs = _.flatten(funs);
+            funs.forEach(function(fun) {
+                fun.apply(null, args);
+            });
+        };
+    },
     bindLeft: function(obj, fn) {
         if(typeof fn === 'string') {
             fn = obj[fn];
@@ -34,31 +44,6 @@ var _ = {
         args.shift();
         return function() {
             return fn.apply(obj, Array.from(arguments).concat(args));
-        };
-    },
-    undefined: _undefined,
-    unique: function() {
-        var values = _flatten(Array.from(arguments));
-        var map = new Map();
-        return values.filter(function(value) {
-            if(map.has(value)) {
-                return false;
-            }
-            map.set(value, 1);
-            return true;
-        });
-    },
-    flatten: function() {
-        return _flatten(Array.from(arguments));
-    },
-    all: function() {
-        var funs = Array.from(arguments);
-        return function() {
-            var args = Array.from(arguments);
-            funs = _.flatten(funs);
-            funs.forEach(function(fun) {
-                fun.apply(null, args);
-            });
         };
     },
     copy: function(source, target) {
@@ -107,6 +92,9 @@ var _ = {
         });
         return target;
     },
+    flatten: function() {
+        return _flatten(Array.from(arguments));
+    },
     noop: function() {
     },
     notEmpty: function(item) {
@@ -129,6 +117,18 @@ var _ = {
     },
     pass: function(value) {
         return value;
+    },
+    undefined: _undefined,
+    unique: function() {
+        var values = _flatten(Array.from(arguments));
+        var map = new Map();
+        return values.filter(function(value) {
+            if(map.has(value)) {
+                return false;
+            }
+            map.set(value, 1);
+            return true;
+        });
     },
     zip: function(arrays) {
         var keys = Object.keys(arrays);
