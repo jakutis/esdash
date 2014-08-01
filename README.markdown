@@ -34,6 +34,8 @@ Functional programming helper library that is aware of (does not duplicate) the 
 ## API
 
 * all
+* bindLeft
+* bindRight
 * copy
 * dateRFC1123
 * extend
