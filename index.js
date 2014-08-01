@@ -17,12 +17,18 @@ var _flatten = function(array) {
 };
 var _undefined;
 var _ = {
-    bindLeft: function(fn, obj) {
+    bindLeft: function(obj, fn) {
+        if(typeof fn === 'string') {
+            fn = obj[fn];
+        }
         var args = Array.from(arguments);
         args.shift();
         return fn.bind.apply(fn, args);
     },
-    bindRight: function(fn, obj) {
+    bindRight: function(obj, fn) {
+        if(typeof fn === 'string') {
+            fn = obj[fn];
+        }
         var args = Array.from(arguments);
         args.shift();
         args.shift();

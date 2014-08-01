@@ -8,7 +8,7 @@ describe('bindLeft', function() {
         var fn = function(a, b, c) {
             values = [a, b, c];
         };
-        _.bindLeft(fn, null, 1, 2)(3);
+        _.bindLeft(null, fn, 1, 2)(3);
         assert.equal(values[0], 1);
         assert.equal(values[1], 2);
         assert.equal(values[2], 3);
