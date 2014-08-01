@@ -29,34 +29,6 @@ var _flatten = function(array) {
 };
 var _undefined;
 var _ = {
-    bindLeft: function(fn, obj) {
-        var args = Array.from(arguments);
-        args.shift();
-        return fn.bind.apply(fn, args);
-    },
-    bindRight: function(fn, obj) {
-        var args = Array.from(arguments);
-        args.shift();
-        args.shift();
-        return function() {
-            return fn.apply(obj, Array.from(arguments).concat(args));
-        };
-    },
-    undefined: _undefined,
-    unique: function() {
-        var values = _flatten(Array.from(arguments));
-        var map = new Map();
-        return values.filter(function(value) {
-            if(map.has(value)) {
-                return false;
-            }
-            map.set(value, 1);
-            return true;
-        });
-    },
-    flatten: function() {
-        return _flatten(Array.from(arguments));
-    },
     all: function() {
         var funs = Array.from(arguments);
         return function() {
@@ -65,6 +37,25 @@ var _ = {
             funs.forEach(function(fun) {
                 fun.apply(null, args);
             });
+        };
+    },
+    bindLeft: function(obj, fn) {
+        if(typeof fn === 'string') {
+            fn = obj[fn];
+        }
+        var args = Array.from(arguments);
+        args.shift();
+        return fn.bind.apply(fn, args);
+    },
+    bindRight: function(obj, fn) {
+        if(typeof fn === 'string') {
+            fn = obj[fn];
+        }
+        var args = Array.from(arguments);
+        args.shift();
+        args.shift();
+        return function() {
+            return fn.apply(obj, Array.from(arguments).concat(args));
         };
     },
     copy: function(source, target) {
@@ -113,6 +104,9 @@ var _ = {
         });
         return target;
     },
+    flatten: function() {
+        return _flatten(Array.from(arguments));
+    },
     noop: function() {
     },
     notEmpty: function(item) {
@@ -135,6 +129,18 @@ var _ = {
     },
     pass: function(value) {
         return value;
+    },
+    undefined: _undefined,
+    unique: function() {
+        var values = _flatten(Array.from(arguments));
+        var map = new Map();
+        return values.filter(function(value) {
+            if(map.has(value)) {
+                return false;
+            }
+            map.set(value, 1);
+            return true;
+        });
     },
     zip: function(arrays) {
         var keys = Object.keys(arrays);

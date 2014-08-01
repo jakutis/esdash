@@ -1,6 +1,6 @@
 {
   "name": "esdash",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Functional programming helper library that is aware of (does not duplicate) the latest ECMAScript features, which are polyfillable in all ECMA-262 (even oldest browsers).",
   "main": "index.umd.js",
   "scripts": {

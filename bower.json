@@ -1,7 +1,7 @@
 {
   "name": "esdash",
   "main": "index.umd.js",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "authors": [
     "Vytautas Jakutis <vytautas@jakut.is>"
   ],
